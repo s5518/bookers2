@@ -1,7 +1,9 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw d
   resources :users, only: [:new, :create] , path: 'users', path_names: { new: 'sign_up' }
   resource :session
   resources :passwords, param: :token
+
+  resources :books, only: [:new, :index, :show, :edit]
   root to: "homes#top"
   get "homes/about" => "homes#about" , as: "about"
 
