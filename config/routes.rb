@@ -3,7 +3,7 @@ Rails.application.routes.draw d
   resource :session
   resources :passwords, param: :token
 
-  resources :books, only: [:new, :index, :show, :edit]
+  resources :books, only: [:new, :create, :index, :show, :edit]
   root to: "homes#top"
   get "homes/about" => "homes#about" , as: "about"
 
