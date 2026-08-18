@@ -2,7 +2,7 @@
 
 <h2>User info</h2> 
   <%= form_with model: @user, local: true do |f| %> 
-    <%= f.file_field :profile_image, accept: "image/*" %>  
+   
     <div>
       <%= f.label :name, "name" %>
       <%= f.text_field :name %>
