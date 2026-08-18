@@ -1,0 +1,40 @@
+<section class="user-edit-section">
+
+<h2>プロフィール編集</h2> 
+  <%= form_with model: @user, local: true do |f| %> 
+    <div>
+      <%= f.label :name, "ユーザー名" %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.submit "プロフィールを更新" %>
+    </div>
+  <% end %>
+</section>
+
+<section class="book-new-section">
+
+<h2>New Book</h2>
+  <%= form_with model: @book, local: true do |f| %>
+    <div> 
+      <%= f.label :title, "本のタイトル" %>
+    <%= f.text_field :title %>
+    </div>
+    <.div>
+      <%= f.submit "投稿する" %>
+    </div>
+  <% end %>
+</section>
+
+
+<section class="book-list-section">
+
+  <h2><%= @user.name %> さんの投稿一覧</h2>
+  <ul>
+   <% @books.each do |book| %> 
+      <li>
+        <%= book.title %>
+      </li>
+      <% end %>
+  </ul>
+</section>
