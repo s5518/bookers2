@@ -15,10 +15,23 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @user = current_user
+  end
+
+  def updete
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to books_path, notice: 'プロフィール画像を更新しました'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
  
   private
  
   def user_params
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :image)
   end
 end
