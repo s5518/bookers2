@@ -16,12 +16,13 @@
   
     <body>
       <tr>
-        <td><%= @book.title %></td>
-        <td><%= @book.body %></td>
-        <td><%= link_to "Edit", edit_book_path(@book) %></td>
-        <td><%= link_to "Destroy", book_path(@book), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" } %></td>
+        <td><%= @book_detail.title %></td>
+        <td><%= @book_detail.body %></td>
+        <td><%= link_to "Edit", edit_book_path(@book_detail) %></td>
+        <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" } %></td>
       </tr>
     </body>
   </table>
+  <%= link_to @user.name, user_path(Current.user.id) %>
   
 </section>
