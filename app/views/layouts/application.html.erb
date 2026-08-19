@@ -21,24 +21,56 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <script src="https://kit.fontawesome.com/ef2d7ba232.js" crossorigin="anonymous"></script>
     <%= javascript_importmap_tags %>
+    
   </head>
 
   <body>
     <header>
+      <li><%= link_to "Bookers", session_path %></li>
       <% if authenticated? %>
         <li>
-          <%= link_to "Home", user_path(Current.user.id) %>
+          <%= link_to user_path(Current.user.id) do %>
+            <i class="fa-solid fa-house"></i>Home
+          <% end %>
         </li>
         <li>
-          <%= link_to "Log out", session_path, data: { turbo_method: :delete } %>
+          <%= link_to users_path do %>
+            <i class="fa-solid fa-users"></i>Users
+          <% end %>
         </li>
+        <li>
+          <%= link_to books_path do %>
+            <i class="fa-solid fa-book-open"></i>Books
+          <% end %>
+        </li>
+        <li>
+          <%= link_to session_path, data: { turbo_method: :delete } do %>
+            <i class="fa-solid fa-right-to-bracket"></i>Log out
+          <% end %>
+        </li>
+
       <% else %>
         <li>
-          <%= link_to "新規登録", new_user_path %>
+          <%= link_to session_path do %>
+            <i class="fa-solid fa-house"></i>Home
+          <% end%>
         </li>
         <li>
-          <%= link_to "ログイン", new_session_path %>
+          <%= link_to about_path do %>
+            <i class="fa-solid fa-link"></i>About
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_path do %>
+            <i class="fa-solid fa-user-plus"></i>Sign up
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_session_path do %>
+            <i class="fa-solid fa-right-to-bracket"></i></i>Log in
+          <% end %>
         </li>
       <% end %>
    </header>

@@ -1,4 +1,4 @@
-<h2>サインアップ</h2>
+<h1>Sign up</h1>
 
 <%= form_with model: @user, url: users_path do |f| %>
   <% if @user.errors.any? %>
@@ -15,15 +15,19 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true %>
+    <span>
+    <i class="fa-regular fa-circle-user"></i>
+    <i class="fa-solid fa-chevron-down"></i>
+    </span>
   </div>
 
   <div class="field">
-    <%= f.label :email_address %><br>
+    <%= f.label :email_address, "Email" %><br>
     <%= f.email_field :email_address %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password, "Password (6 characters minimum)" %><br>
     <%= f.password_field :password %>
   </div>
 
@@ -33,8 +37,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "サインアップ" %>
+    <%= f.submit "Sign up" %>
   </div>
 <% end %>
 
-<%= link_to "ログインはこちら", new_session_path %>
+<%= link_to "Log in", new_session_path %>
