@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:new, :create] , path: 'users', path_names: { new: 'sign_up' }
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
   resource :session
   resources :passwords, param: :token
 
