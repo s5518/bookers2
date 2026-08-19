@@ -28,7 +28,8 @@
 
   <body>
     <header>
-      <li><%= link_to "Bookers", session_path %></li>
+      <li><%= link_to "Bookers", root_path %></li>
+
       <% if authenticated? %>
         <li>
           <%= link_to user_path(Current.user.id) do %>
@@ -53,7 +54,7 @@
 
       <% else %>
         <li>
-          <%= link_to session_path do %>
+          <%= link_to root_path do %>
             <i class="fa-solid fa-house"></i>Home
           <% end%>
         </li>
@@ -76,4 +77,8 @@
    </header>
    <%= yield %>
   </body>
+
+  <footer>
+    <p>CopyRight Infratop.inc</p>
+  </footer>
 </html>
