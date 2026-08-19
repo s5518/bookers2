@@ -17,6 +17,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @user = Current.user
+    @book = Book.new
   end
 
   def show
@@ -30,10 +32,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def updete
-    @user = current_user
+  def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to books_path, notice: 'プロフィール画像を更新しました'
+      redirect_to user_path(Current.user.id)
     else
       render :edit, status: :unprocessable_entity
     end

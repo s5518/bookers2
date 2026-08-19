@@ -8,11 +8,13 @@
       <%= f.text_field :name %>
     </div>
     <div>
-      <%= f.label :introduction, "introduction" %>
+      <%= f.label :introduction, "introduction" %><br>
       <%= f.text_field :introduction %>
     </div>
     <div>
-      <%= link_to "更新マークを入れる", edit_user_path(@user), class: "btn btn-outline-secondary" %>
+      <%= link_to edit_user_path(@user) do %>
+        <i class="fa-solid fa-user-gear"></i>
+      <% end %>
     </div>
   <% end %>
 </section>
