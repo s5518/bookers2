@@ -1,35 +1,7 @@
-<section class="user-edit-section">
+<%= render 'books/list' %>
 
-<h2>User info</h2> 
-  <%= form_with model: @user, local: true do |f| %> 
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <div>
-      <%= f.label :name, "name" %>
-      <%= f.text_field :name %>
-    </div>
-    <div>
-      <%= f.label :introduction, "introduction" %>
-      <%= f.text_field :introduction %>
-    </div>
-    <div>
-      <%= link_to "更新マークを入れる", edit_user_path(@user), class: "btn btn-outline-secondary" %>
-    </div>
-  <% end %>
-</section>
 
-<section class="book-new-section">
 
-<h2>New Book</h2>
-  <%= form_with model: @book, local: true do |f| %>
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-    <div>
-      <%= f.submit 'Create Book' %>
-    </div>
-  <% end %>
-</section>
 
 
 <section class="book-list-section">
