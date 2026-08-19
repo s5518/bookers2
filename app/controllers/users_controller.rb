@@ -9,8 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      #ユーザー新規登録が成功したら、Home画面へリダイレクトする
-      redirect_to new_session_path
+      redirect_to user_path(Current.user.id)
     else
       render :new, status: :unprocessable_entity
     end
