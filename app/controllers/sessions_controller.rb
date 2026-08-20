@@ -6,8 +6,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if (user = User.find_by(name: params[:name]))&.authenticate(params[:password]) # この行を変更
+    if (user = User.find_by(name: params[:name]))&.authenticate(params[:password])
       start_new_session_for user
+      flash[:notice] = "Signed in successfully."
       redirect_to after_authentication_url
     else
       redirect_to new_session_path, alert: "Try another name or password."
@@ -16,6 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
+    flash[:notice] = "Signed out successfully."
     redirect_to new_session_path, status: :see_other
   end
 end
