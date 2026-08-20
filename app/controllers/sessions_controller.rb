@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
   def destroy
     terminate_session
     flash[:notice] = "Signed out successfully."
-    redirect_to new_session_path, status: :see_other
+    redirect_to root_path, status: :see_other
   end
 end

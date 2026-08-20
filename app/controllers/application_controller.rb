@@ -11,4 +11,5 @@ class ApplicationController < ActionController::Base
   def after_authentication_url
     user_path(Current.user.id)
   end
+  
 end
