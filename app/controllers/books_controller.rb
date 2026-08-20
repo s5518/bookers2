@@ -13,8 +13,8 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
     else
       @books = Book.all
-      @user = User.find(Current.user.id)
-      render :index, status: :unprocessable_entity
+      @user = Current.user
+      render "users/show", status: :unprocessable_entity
     end
   end
 
@@ -57,7 +57,7 @@ class BooksController < ApplicationController
   end
 
   def is_matching_login_user
-    book = Book.find(params[:id])
+    @book_detail = Book.find(params[:id])
     unless @book_detail.user.id == Current.user.id
       redirect_to books_path
     end

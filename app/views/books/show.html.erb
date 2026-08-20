@@ -1,30 +1,26 @@
-<%= render 'list' %>
+<div class="container px-5 px-sm-o">
+  <div class="row">
 
-
-<section class="book-list-section">
-
-  <h2>Book detail</h2>
-
-  <table>
-    <head>
-      <tr>
-        <th>Title</th>
-        <th>Opinion</th>
-        <th colspan="2"></th>
-      </tr>
-    </head>
-  
-    <body>
-      <tr>
-        <td><%= @book_detail.title %></td>
-        <td><%= @book_detail.body %></td>
-        <% if @book_detail.user.id == Current.user&.id %>
-          <td><%= link_to "Edit", edit_book_path(@book_detail) %></td>
-          <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" } %></td>
-        <% end %>
-      </tr>
-    </body>
-  </table>
-  <%= link_to @book_detail.user.name, user_path(@book_detail.user.id) %>
-  
-</section>
+    <div class="col-md-3">
+      <%= render 'list' %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        
+        <body>
+          <tr>
+            <td><%= image_tag @book_detail.user.get_profile_image(100,100) %></td>
+            <td><%= link_to @book_detail.title, book_path(@book_detail.id), class: "text-decoration-none" %></td>
+            <td><%= @book_detail.body %></td>
+            <% if @book_detail.user.id == Current.user.id %>
+              <td><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success text-white" %></td>
+              <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
+            <% end %>
+          </tr>
+        </body>
+      </table>
+      <%= link_to @book_detail.user.name, user_path(@book_detail.user.id), class: "text-decoration-none" %>
+    </div>
+  </div>
+</div>

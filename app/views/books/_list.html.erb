@@ -1,47 +1,39 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
-<% if @book.errors.any? %>
-      <h2><%= @book.errors.count %> errors prohibited this book form being saved: </h2>
-      <ul>
-        <% @book.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-  <% end %>
-
-<section class="user-edit-section">
+<div class="container px-5 px-sm-o">
 
 <h2>User info</h2> 
-  <%= form_with model: @user, local: true do |f| %> 
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <div>
-      <%= f.label :name, "name" %>
-      <%= f.text_field :name %>
-    </div>
-    <div>
-      <%= f.label :introduction, "introduction" %><br>
-      <%= f.text_field :introduction %>
-    </div>
-    <div>
-      <%= link_to edit_user_path(@user) do %>
-        <i class="fa-solid fa-user-gear"></i>
-      <% end %>
-    </div>
-  <% end %>
-</section>
+  <table class="table">
+    <body>
+      <tr>
+        <td colspan="2" class="text-center">
+          <%= image_tag @user.get_profile_image(100,100) %>
+        </td>
+      </tr>
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @user.introduction %></th>
+      </tr>
+    </body>
+  </table>
 
-<section class="book-new-section">
+  <div class="row mb-3">
+    <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block w-100" do %>
+      <i class="fa-solid fa-user-gear"></i>
+    <% end %>
+  </div>
 
-<h2>New Book</h2>
-  <%= form_with model: @book, local: true do |f| %>
-    <h4>Title</h4>
-    <%= f.text_field :title %>
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-    <div>
-      <%= f.submit 'Create Book' %>
-    </div>
-  <% end %>
-</section>
+
+  <h2 class="mt-3">New Book</h2>
+    <%= form_with model: @book, local: true do |f| %>
+      <h4>Title</h4>
+      <%= f.text_field :title %>
+      <h4>Opinion</h4>
+      <%= f.text_area :body %>
+      <div>
+        <%= f.submit 'Create Book', class:"btn btn-success" %>
+      </div>
+    <% end %>
+</div>

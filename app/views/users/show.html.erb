@@ -1,29 +1,42 @@
-<%= render 'books/list' %>
+<div class="container px-5 px-sm-o">
+  <% if @book.errors.any? %>
+    <div class="alert">
+      <h2><%= @book.errors.count %> errors prohibited this book form being saved: </h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <div class="row">
 
+    <div class="col-md-3">
+      <%= render 'books/list' %>
+    </div>
 
-
-
-<section class="book-list-section">
-
-  <h2>Books</h2>
-
-  <table>
-    <head>
-      <tr>
-        <th>Title</th>
-        <th>Opinion</th>
-      </tr>
-    </head>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover">
+        <head>
+          <tr>
+            <th colspan="1"></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </head>
   
-    <body>
-      <% @books.each do |book| %> 
-        <tr>
-          <td><%= link_to book.title, book_path(book) %></td>
-          <td><%= book.body %></td>
-        </tr>
-      <% end %>
-    </body>
-  </table>
-  
-</section>
+        <body>
+          <% @books.each do |book| %> 
+            <tr>
+              <td><%= image_tag @user.get_profile_image(100,100) %></td>
+              <td><%= link_to book.title, book_path(book), class: "text-decoration-none" %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+        </body>
+      </table>
+    </div>
+  </div>
+</div>
