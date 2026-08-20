@@ -18,11 +18,13 @@
       <tr>
         <td><%= @book_detail.title %></td>
         <td><%= @book_detail.body %></td>
-        <td><%= link_to "Edit", edit_book_path(@book_detail) %></td>
-        <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" } %></td>
+        <% if @book.user_id == Current.user.id %>
+          <td><%= link_to "Edit", edit_book_path(@book_detail) %></td>
+          <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" } %></td>
+        <% end %>
       </tr>
     </body>
   </table>
-  <%= link_to @user.name, user_path(Current.user.id) %>
+  <%= link_to @book_detail.user.name, user_path(@book_detail.user.id) %>
   
 </section>
