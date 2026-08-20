@@ -13,10 +13,6 @@
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true %>
-    <span>
-    <i class="fa-regular fa-circle-user"></i>
-    <i class="fa-solid fa-chevron-down"></i>
-    </span>
   </div>
 
   <div class="field">
@@ -25,7 +21,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password, "Password (6 characters minimum)" %><br>
+    <%= f.label :password, "Password(6 characters minimum)" %><br>
     <%= f.password_field :password %>
   </div>
 
@@ -34,9 +30,11 @@
     <%= f.password_field :password_confirmation %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="mb-2">
+    <%= f.submit "Sign up", class: "btn btn-success text-white" %>
   </div>
 <% end %>
 
-<%= link_to "Log in", new_session_path %>
+<div>
+<%= link_to "Log in", new_session_path, class: "text-decoration-none" %>
+</div>
