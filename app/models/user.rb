@@ -5,9 +5,9 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_one_attached :profile_image
 
-  validates :name, prensene: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email_address, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, confirmation: true
+  validates :password, presence: true, on: :create
+  validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
   def get_profile_image(width, height)

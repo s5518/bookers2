@@ -1,5 +1,13 @@
 <h2>User info</h2>
 <%= form_with model: @user do |f| %>
+  <% if @user.errors.any? %>
+  <h2><%= @user.errors.count %> errors prohibited this book form being saved: </h2>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
   <div>
     <label for="inputName">Name</label><br>
