@@ -10,7 +10,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Welcome! You have signed up successfully."
-      redirect_to user_path(Current.user.id)
+      start_new_session_for(@user)
+      redirect_to user_path(@user.id)
     else
       render :new, status: :unprocessable_entity
     end
