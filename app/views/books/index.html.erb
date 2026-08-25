@@ -25,6 +25,20 @@
               </td>
               <td><%= link_to book.title, book_path(book.id), class: "text-decoration-none" %></td>
               <td><%= book.body %></td>
+
+              <% if @book.favorited_by?(Current.user) %>
+                <td>
+                  <%= link_to book_favorite_path(book.id), data: { turbo_method: :delete } do %>
+                    ♥<%= @book.favorites.count %>
+                  <% end %>
+                </td>
+              <% else %>
+                <td>
+                  <%= link_to book_favorite_path(book.id), data: { turbo_method: "post" } do %>
+                    ♡<%= @book.favorites.count %>
+                  <% end %>
+                </td>
+              <% end %>
             </tr>
           <% end %>
         </body>
