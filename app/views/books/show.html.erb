@@ -6,20 +6,20 @@
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
-      <table class="table">
+      <table class="table table-borderless mb-0">
         
         <body>
           <tr>
-            <td><%= image_tag @book_detail.user.get_profile_image(100,100) %></td>
-            <td><%= link_to @book_detail.title, book_path(@book_detail.id), class: "text-decoration-none" %></td>
-            <td><%= @book_detail.body %></td>
+            <td class="col-2 pb-0"><%= image_tag @book_detail.user.get_profile_image(100,100) %></td>
+            <td class="col-3 pb-0"><%= link_to @book_detail.title, book_path(@book_detail.id), class: "text-decoration-none" %></td>
+            <td class="col-3 pb-0"><%= @book_detail.body %></td>
             <% if @book_detail.user.id == Current.user.id %>
-              <td><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success text-white" %></td>
-              <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
+              <td class="col-0.5 pb-0"><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success text-white" %></td>
+              <td class="col-0.5 pb-0"><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
             <% end %>
 
             <% if @book_detail.favorited_by?(Current.user) %>
-              <td>
+              <td class="col-0.5 pb-0">
                 <%= link_to book_favorite_path(@book_detail), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
                   <span class="<%= 'text-danger' if @book_detail.favorites.count > 0 %>">
                     <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
@@ -27,17 +27,43 @@
                 <% end %>
               </td>
             <% else %>
-              <td>
+              <td class="col-0.5 pb-0">
                 <%= link_to book_favorite_path(@book_detail), data: { turbo_method: "post" }, class: "text-decoration-none" do %>
                   <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
                 <% end %>
               </td>
             <% end %>
 
+            <td class="col-1.5 pb-0">
+              <p>コメント数：<%= @book_detail.post_comments.count %></p>
+            </td>
           </tr>
         </body>
       </table>
       <%= link_to @book_detail.user.name, user_path(@book_detail.user.id), class: "text-decoration-none" %>
+
+      <div>
+        <% @book_detail.post_comments.each do |post_comment| %>
+          <%= image_tag post_comment.user.get_profile_image(100,100) %>
+          <%= post_comment.comment %>
+          <% if post_comment.user == Current.user %>
+            <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), data: { turbo_method: :delete }, class: "btn btn-danger text-white" %>
+          <% end %>
+          <div>
+            <%= link_to post_comment.user.name, user_path(post_comment.user) %>
+          </div>
+          
+        <% end %>
+      </div>
+      <div>
+        <%= form_with model: [@book_detail, @post_comment] do |f| %>
+          <%= f.text_area :comment, rows: '5', style: "width: 100%;" %>
+          <div>
+            <%= f.submit "送信" %>
+          </div>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>
