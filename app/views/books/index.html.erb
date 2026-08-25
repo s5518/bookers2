@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-o">
+<div class="container px-5 px-sm-0">
   <div class="row">
 
     <div class="col-md-3">
@@ -26,19 +26,22 @@
               <td><%= link_to book.title, book_path(book.id), class: "text-decoration-none" %></td>
               <td><%= book.body %></td>
 
-              <% if @book.favorited_by?(Current.user) %>
+              <% if book.favorited_by?(Current.user) %>
                 <td>
-                  <%= link_to book_favorite_path(book.id), data: { turbo_method: :delete } do %>
-                    ♥<%= @book.favorites.count %>
+                  <%= link_to book_favorite_path(book), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
+                    <span class="<%= 'text-danger' if book.favorites.count > 0 %>">
+                      <i class="fa-solid fa-heart" ></i><%= book.favorites.count %>
+                    </span>
                   <% end %>
                 </td>
               <% else %>
                 <td>
-                  <%= link_to book_favorite_path(book.id), data: { turbo_method: "post" } do %>
-                    ♡<%= @book.favorites.count %>
+                  <%= link_to book_favorite_path(book), data: { turbo_method: "post" }, class: "text-decoration-none" do %>
+                    <i class="fa-solid fa-heart"></i><%= book.favorites.count %>
                   <% end %>
                 </td>
               <% end %>
+              
             </tr>
           <% end %>
         </body>

@@ -1,4 +1,4 @@
-<div class="container px-5 px-sm-o">
+<div class="container px-5 px-sm-0">
   <div class="row">
 
     <div class="col-md-3">
@@ -18,15 +18,17 @@
               <td><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
             <% end %>
 
-            <% if @book.favorited_by?(Current.user) %>
+            <% if @book_detail.favorited_by?(Current.user) %>
               <td>
-                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: :delete } do %>
-                  <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
+                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
+                  <span class="<%= 'text-danger' if @book_detail.favorites.count > 0 %>">
+                    <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
+                  </span>
                 <% end %>
               </td>
             <% else %>
               <td>
-                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: "post" } do %>
+                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: "post" }, class: "text-decoration-none" do %>
                   <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
                 <% end %>
               </td>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-    resource :favorites, only: [:create, :destroy]
+    resource :favorite, only: [:create, :destroy]
   end
   root to: "homes#top"
   get "home/about" => "homes#about" , as: "about"
