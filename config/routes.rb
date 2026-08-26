@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
+
+  get "/search", to: "searches#search"
   
   root to: "homes#top"
   get "home/about" => "homes#about" , as: "about"
