@@ -1,0 +1,14 @@
+<%= turbo_frame_tag dom_id(book, :favorite) do %>
+  <% if book.favorited_by?(Current.user) %>
+    <%= link_to book_favorite_path(book), data: { turbo_method: :delete }, class: "text-decoration-none text-danger" do %>
+      <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+      <%= book.favorites.count %>
+    <% end %>
+  <% else %>
+    <% text_color = book.favorites.count > 0 ? "text-danger" : "text-dark" %>
+    <%= link_to book_favorite_path(book), data: { turbo_method: :post }, class: "text-decoration-none" do %>
+      <i class="fas fa-heart" aria-hidden="true"></i>
+      <%= book.favorites.count %>
+    <% end %>
+  <% end %>
+<% end %>

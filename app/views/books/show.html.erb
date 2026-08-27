@@ -18,21 +18,11 @@
               <td class="col-0.5 pb-0"><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
             <% end %>
 
-            <% if @book_detail.favorited_by?(Current.user) %>
-              <td class="col-0.5 pb-0">
-                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
-                  <span class="<%= 'text-danger' if @book_detail.favorites.count > 0 %>">
-                    <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
-                  </span>
-                <% end %>
-              </td>
-            <% else %>
-              <td class="col-0.5 pb-0">
-                <%= link_to book_favorite_path(@book_detail), data: { turbo_method: "post" }, class: "text-decoration-none" do %>
-                  <i class="fa-solid fa-heart"></i><%= @book_detail.favorites.count %>
-                <% end %>
-              </td>
-            <% end %>
+            <td class="col-0.5 pb-0">
+              <%= turbo_frame_tag dom_id(@book, :favorite) do %>
+                <%= render 'favorites/favorite_btn', book: @book %>
+              <% end %>
+            </td>
 
             <td class="col-1.5 pb-0">
               <p>コメント数：<%= @book_detail.post_comments.count %></p>

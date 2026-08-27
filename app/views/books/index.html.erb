@@ -26,21 +26,11 @@
               <td class="col-3 pb-0"><%= link_to book.title, book_path(book.id), class: "text-decoration-none" %></td>
               <td class="col-4 pb-0"><%= book.body %></td>
 
-              <% if book.favorited_by?(Current.user) %>
-                <td class="col-0.5 pb-0">
-                  <%= link_to book_favorite_path(book), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
-                    <span class="<%= 'text-danger' if book.favorites.count > 0 %>">
-                      <i class="fa-solid fa-heart" ></i><%= book.favorites.count %>
-                    </span>
-                  <% end %>
-                </td>
-              <% else %>
-                <td class="col-0.5 pb-0">
-                  <%= link_to book_favorite_path(book), data: { turbo_method: "post" }, class: "text-decoration-none" do %>
-                    <i class="fa-solid fa-heart"></i><%= book.favorites.count %>
-                  <% end %>
-                </td>
-              <% end %>
+              <td class="col-0.5 pb-0">
+                <%= turbo_frame_tag dom_id(book, :favorite) do %>
+                  <%= render 'favorites/favorite_btn', book: book %>
+                <% end %>
+              </td>
 
               <td class="col-1.5 pb-0">
                 <p>コメント数：<%= book.post_comments.count %></p>
