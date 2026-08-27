@@ -1,0 +1,14 @@
+<div id="comments_area">
+  <% book.post_comments.each do |post_comment| %>
+    <div>
+      <%= image_tag post_comment.user.get_profile_image(100,100) %>
+      <%= post_comment.comment %>
+      <% if post_comment.user == Current.user %>
+          <%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), data: { turbo_method: :delete }, class: "btn btn-danger text-white" %>
+      <% end %>
+      <div>
+        <%= link_to post_comment.user.name, user_path(post_comment.user) %>
+      </div>
+    </div>
+  <% end %>
+</div>
