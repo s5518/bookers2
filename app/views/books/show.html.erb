@@ -11,22 +11,23 @@
         <body>
           <tr>
             <td class="col-2 pb-0"><%= image_tag @book_detail.user.get_profile_image(100,100) %></td>
-            <td class="col-3 pb-0"><%= link_to @book_detail.title, book_path(@book_detail.id), class: "text-decoration-none" %></td>
-            <td class="col-3 pb-0"><%= @book_detail.body %></td>
-            <% if @book_detail.user.id == Current.user.id %>
-              <td class="col-0.5 pb-0"><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success text-white" %></td>
-              <td class="col-0.5 pb-0"><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
-            <% end %>
-
+            <td class="col-2 pb-0"><%= link_to @book_detail.title, book_path(@book_detail.id), class: "text-decoration-none" %></td>
+            <td class="col-2 pb-0"><%= @book_detail.body %></td>
             <td class="col-0.5 pb-0">
               <%= turbo_frame_tag dom_id(@book_detail, :favorite) do %>
                 <%= render 'favorites/favorite_btn', book: @book_detail %>
               <% end %>
             </td>
-
             <td class="col-1.5 pb-0">
               <p>コメント数：<%= @book_detail.post_comments.count %></p>
             </td>
+            <td>
+              <div id="show_raty" data-score="<%= @book_detail.star %>"></div>
+            </td>
+            <% if @book_detail.user.id == Current.user.id %>
+              <td class="col-0.5 pb-0"><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success text-white" %></td>
+              <td class="col-0.5 pb-0"><%= link_to "Destroy", book_path(@book_detail), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger text-white" %></td>
+            <% end %>
           </tr>
         </body>
       </table>
