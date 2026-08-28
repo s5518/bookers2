@@ -14,13 +14,13 @@ document.addEventListener("turbo:load", () => {
     }).init();
   }
 
-  const showElem = document.querySelectorAll(".show_raty");
-  if (showElem) {
+  const showElems = document.querySelectorAll(".show_raty");
+  if (showElems.length > 0) {
+    showElems.forEach((elem) => {
+    elem.innerHTML = "";
 
-    showElem.innerHTML = "";
-
-    const score = showElem.dataset.socre;
-    new Raty(showElem, {
+    const score = elem.dataset.score;
+    new Raty(elem, {
       score: score,
       readOnly: true,
       starType: "img",
@@ -29,5 +29,6 @@ document.addEventListener("turbo:load", () => {
       starOff: "star-off.png",
       starHalf: "star-half.png",
     }).init();
+  });
   }
 });
