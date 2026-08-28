@@ -27,6 +27,10 @@ class BooksController < ApplicationController
       @books = Book.all.order(created_at: :desc)
     elsif params[:star_count]
       @books = Book.all.order(star: :desc)
+    elsif params[:catefory]
+      @books = Book.where(category: params[:category])
+    elsif params[:search_category]
+      @books = Book.where("category LIKE ?", "%#{paramas[:search_category]}")
     else
       @books = Book.all
     end
@@ -63,7 +67,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :star)
+    params.require(:book).permit(:title, :body, :star, :category)
   end
 
   def is_matching_login_user

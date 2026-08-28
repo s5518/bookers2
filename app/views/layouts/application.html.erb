@@ -96,8 +96,17 @@
       <p class="text-dark"><%= flash[:notice] %></p>
 
       <% if Current.user %>
-        <div class="d-flex justify-content-center mb-2">
-          <%= render "searches/form" %>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+          <div>
+            <%= render "searches/form" %>
+          </div>
+          <div class="mx-3"></div>
+          <div>
+            <%= form_with url: search_tag_path, method: :get, local: true do |f| %>
+              <%= f.text_field :search_category %>
+              <%= f.submit "タグ検索" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
       <%= yield %>

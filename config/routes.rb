@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   get "/search", to: "searches#search"
+  get "search_tag" => "searches#search_tag"
   
   root to: "homes#top"
   get "home/about" => "homes#about" , as: "about"

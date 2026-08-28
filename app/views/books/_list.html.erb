@@ -18,11 +18,11 @@
       </tr>
       <tr>
         <th>follows</th>
-        <th><%= link_to user.followings.count, user_followings_path(@user) %></th>
+        <th><%= link_to user.followings.count, user_followings_path(user) %></th>
       </tr>
       <tr>
         <th>followers</th>
-        <th><%= link_to user.followers.count, user_followers_path(@user) %></th>
+        <th><%= link_to user.followers.count, user_followers_path(user) %></th>
       </tr>
     </body>
   </table>
@@ -44,11 +44,14 @@
       <%= f.text_field :title %>
       <h4>Opinion</h4>
       <%= f.text_area :body %>
-
-        <div class="form-group" id="star">
-          <%= f.label :star, 'Rate' %>
-          <div id="post_raty"></div>
-        </div>
+      <div class="form-group" %>
+        <%= f.label :category, 'Tag' %>
+        <%= f.text_field :category %>
+      </div>
+      <div class="form-group" id="star">
+        <%= f.label :star, 'Rate' %>
+        <div id="post_raty"></div>
+      </div>
 
       <div>
         <%= f.submit 'Create Book', class:"btn btn-success" %>

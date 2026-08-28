@@ -14,4 +14,18 @@ class SearchesController < ApplicationController
     end
   end
 
+  def search_tag
+    @book = Book.new
+    @user = Current.user
+    
+    if params[:category].present?
+      @books = Book.where(category: params[:category])
+      @word = params[:category]
+    elsif params[:search_category].present? 
+      @books = Book.where("category LIKE ?", "%#{params[:search_category]}%") 
+      @word = params[:search_category] 
+    else
+      @books = Book.allend 
+    end
+  end
 end

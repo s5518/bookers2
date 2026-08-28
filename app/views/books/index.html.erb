@@ -16,6 +16,7 @@
             <th colspan="1"></th>
             <th>Title</th>
             <th>Opinion</th>
+            <th>Tag</th>
           </tr>
         </head>
   
@@ -29,7 +30,11 @@
               </td>
               <td class="col-2 pb-0"><%= link_to book.title, book_path(book.id), class: "text-decoration-none" %></td>
               <td class="col-2 pb-0"><%= book.body %></td>
-
+              <td>
+                <% if book.category.present? %>
+                  <%= link_to book.category, search_tag_path(category: book.category) %>
+                <% end %>
+              </td>
               <td class="col-0.5 pb-0">
                 <%= turbo_frame_tag dom_id(book, :favorite) do %>
                   <%= render 'favorites/favorite_btn', book: book %>

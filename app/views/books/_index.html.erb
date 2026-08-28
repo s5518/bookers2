@@ -4,6 +4,8 @@
       <th colspan="1"></th>
       <th>Title</th>
       <th>Opinion</th>
+      <th>Tag</th>
+
     </tr>
   </head>
   
@@ -17,6 +19,26 @@
         </td>
         <td><%= link_to book.title, book_path(book.id), class: "text-decoration-none" %></td>
         <td><%= book.body %></td>
+
+        <td>
+          <% if book.category.present? %>
+            <%= link_to book.category, search_tag_path(category: book.category) %>
+          <% end %>
+        </td>
+        <td>
+          <%= turbo_frame_tag dom_id(book, :favorite) do %>
+            <%= render 'favorites/favorite_btn', book: book %>
+          <% end %>
+        </td>
+
+        <td>
+          <p>コメント数：<%= book.post_comments.count %></p>
+        </td>
+              
+        <td>
+          <div class="show_raty" id="show_raty-<%= book.id %>" data-score="<%= book.star %>"></div>
+        </td>
+
       </tr>
     <% end %>
   </body>
