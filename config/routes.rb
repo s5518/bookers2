@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
+  resources :notifications, only: [:update]
+
   get "/search", to: "searches#search"
   get "search_tag" => "searches#search_tag"
   
