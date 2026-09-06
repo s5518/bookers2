@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "home/about" => "homes#about" , as: "about"
 
+  post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
+
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
