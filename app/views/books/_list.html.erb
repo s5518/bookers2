@@ -31,8 +31,10 @@
     <% if Current.user != @user %>
       <td><%= render "relationships/btn", user: user, options: { class: ""} %></td>
     <% else %>
-      <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block w-100" do %>
-        <i class="fa-solid fa-user-gear"></i>
+      <% unless Current.user.guest_user? %>
+        <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block w-100" do %>
+          <i class="fa-solid fa-user-gear"></i>
+        <% end %>
       <% end %>
     <% end %>
   </div>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit, :update]
   allow_unauthenticated_access only: [:new, :create] 
  
   def new
@@ -69,8 +70,9 @@ class UsersController < ApplicationController
 
   def ensure_guest_user
     @user = User.find(params[:id])
-    if @user.email == "guest@example.com"
-      redirect_to user_path(Current.user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    if @user.guest_user?
+      redirect_to user_path(Current.user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。", status: :see_other
     end
   end
 end
+
